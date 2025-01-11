@@ -1,0 +1,38 @@
+Таблица Mods
+ID: (INTEGER PRIMARY KEY AUTOINCREMENT) — Автоинкрементный идентификатор записи.
+
+mod_id: (TEXT) — Идентификатор мода.
+
+title: (TEXT) — Заголовок мода.
+
+category: (TEXT) — Категория мода.
+
+uploader: (TEXT) — Имя загрузившего пользователя.
+
+uploader_link: (TEXT) — Ссылка на профиль загрузившего пользователя.
+
+description: (TEXT) — Краткое описание мода.
+
+full_description: (TEXT) — Полное описание мода.
+
+parsing_date: (TEXT) — Дата парсинга мода.
+
+Таблица Dependencies
+ID: (INTEGER PRIMARY KEY AUTOINCREMENT) — Автоинкрементный идентификатор записи.
+
+mod_id: (TEXT) — Идентификатор мода.
+
+dependency_type: (TEXT) — Тип зависимости (required/dependent).
+
+dependency_name: (TEXT) — Имя зависимого мода.
+
+dependency_link: (TEXT) — Ссылка на зависимый мод.
+
+Таблица Images
+ID: (INTEGER PRIMARY KEY AUTOINCREMENT) — Автоинкрементный идентификатор записи.
+
+mod_id: (TEXT) — Идентификатор мода.
+
+image: (BLOB) — Данные изображения.
+
+upload_date: (TEXT) — Дата загрузки изображения.
