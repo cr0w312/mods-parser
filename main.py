@@ -17,8 +17,6 @@ import time
 import threading
 from dotenv import dotenv_values
 
-# base_path = '/'.join(sys.executable.replace('\\', '/').split('/')[:-1])
-
 # Определение пути к базе данных
 application_path = os.getcwd() if getattr(sys, 'frozen', False) else os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(application_path, 'mods.db')
@@ -29,7 +27,7 @@ print(f"Путь к базе данных: {DB_PATH}")
 if not os.path.exists(DB_PATH):
     print(f"Файл базы данных не найден по пути: {DB_PATH}")
 
-config = { "URL": '' }
+config = { "BASE_URL": '', "MODS_URL": '', "MOD_SECTION": '' }
 if os.path.exists(os.path.join(application_path, '.env')):
     config = dotenv_values(os.path.join(application_path, '.env'))
 
@@ -107,7 +105,7 @@ def fetch_image(url):
 
 def fetch_page_data(mod_id):
     try:
-        base_url = config["URL"]
+        base_url = config["MODS_URL"]
         full_url = urljoin(base_url, mod_id + "?tab=description")
         
         # Настройки тайм-аутов
@@ -329,7 +327,7 @@ def parse_all(last_mod_id):
 
 
 def get_latest_mod_id():
-    url = "https://www.nexusmods.com/skyrimspecialedition/"
+    url = config["BASE_URL"]
     response = requests.get(url)
     response.raise_for_status()
 
@@ -341,7 +339,7 @@ def get_latest_mod_id():
     mod_ids = []
     for link in mod_links:
         href = link['href']
-        if "/skyrimspecialedition/mods/" in href:
+        if config["MOD_SECTION"] in href:
             try:
                 # Извлекаем числовую часть из ссылки
                 mod_id = int(href.split("/")[-1])
