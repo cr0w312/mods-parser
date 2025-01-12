@@ -14,3 +14,7 @@ move .env.example .env
 pyinstaller --onefile --windowed --distpath=.\build\ main.py
 copy .env .\build\.env
 ```
+
+
+
+© by Alhimik
